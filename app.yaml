@@ -1,0 +1,22 @@
+runtime: go116
+
+handlers:
+- url: /.*
+  script: auto
+
+env_variables:
+  auth_token: ""
+  tcp_url: "tonto.cloudwalk.io"
+  port: "3000"
+  http_url: "https://tonto-http.cloudwalk.io"
+  message: "test"
+  timeout: 30
+  interval: 2
+  healthy_threshold: 3
+  unhealthy_threshold: 3
+
+  # Mailgun: Email Credentials
+  sender: ""
+  recipient: ""
+  domain: ""
+  api_key: ""

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 100%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+/* Create two equal columns that floats next to each other */
+.columni {
+  float: left;
+  text-align: center;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.rowi:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+
+
+.form-inline {  
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  margin-left: 25%;
+}
+
+.form-inline label {
+  margin: 5px 10px 5px 0;
+}
+
+.form-inline input {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.form-inline button {
+  padding: 10px 20px;
+  background-color: dodgerblue;
+  border: 1px solid #ddd;
+  color: white;
+  cursor: pointer;
+}
+
+.form-inline button:hover {
+  background-color: royalblue;
+}
+
+@media (max-width: 800px) {
+  .form-inline input {
+    margin: 10px 0;
+  }
+  
+  .form-inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+  $(document).ready(function(){
+    setInterval(function(){
+      $("#tcp_stats").load(" #tcp_stats > *");
+      $("#tcp_logs").load(" #tcp_logs > *");
+      $('#tcp_logs').animate({
+      scrollTop: $('#tcp_logs').get(0).scrollHeight}, 1000);
+
+      $("#client_stats").load(" #client_stats > *");
+      $("#client_logs").load(" #client_logs > *");
+      $('#client_logs').animate({
+      scrollTop: $('#client_logs').get(0).scrollHeight}, 1000);
+    }, 1000);
+  });
+  </script>
+
+</head>
+<body id="bdy">
+
+  <h2 style="text-align: center;">CloudWalk SRE Project</h2>
+
+<div class="rowi">
+  <div class="columni" style="">
+    
+    <div class="column">
+    <div id="client_stats" class="card">
+      
+       <div class="rowi">
+  		<div class="columni">
+        <h3>HTTP Echo</h3>
+        	<span style="font-size: 5em; color: Tomato;">
+  		<i class="fas fa-server"></i>
+		</span>
+        </div>
+        
+  		<div class="columni" style="margin-top: 50px;">
+        {{if eq .StatusLogs.State "healthy"}}
+        <span style="font-size: 5em; color: LightGreen; padding: 25px;">
+          <i class="fas fa-smile-beam"></i>
+        </span>
+
+              {{else}}
+              <span style="font-size: 5em; color: lightgray; padding: 25px;">
+                <i class="fas fa-frown"></i>
+              </span>
+
+              {{end}}
+        </div>
+	</div> 
+  <div>
+    {{if eq .StatusLogs.State "healthy"}}
+        <p style="font-weight: bold;"><span>Status:</span> <span style="color: darkgreen;">{{.StatusLogs.State}}</span></p>
+    {{else}}
+        <p style="font-weight: bold;"><span>Status:</span> <span style="color: red;">{{.StatusLogs.State}}</span></p>
+    {{end}}
+  </div>
+    </div>
+  </div>
+  
+  
+  <div id="client_logs" class="columni" style="height:400px;width:100%;border:1px solid 
+  #ccc;overflow:auto;text-align: left; margin-top: 10px; background-color: black; color: blanchedalmond;">
+      {{range .LogSlice}}
+        <p><span style="color: sandybrown; font-weight: bold;"> -: </span><span>{{ .Auth }}</span></p>
+        <p><span style="color: sandybrown; font-weight: bold;"> -: </span><span>{{ .Sent }}</span></p>
+
+        {{if .CloudState}}
+        <p><span style="color: sandybrown; font-weight: bold;"> -: </span><span style="color: green;">{{ .Received }}</span></p>
+        
+        <p><span style="color: sandybrown; font-weight: bold;"> -: </span><span style="color: green;">{{ .State }}</span></p>
+        <p><span style="color: sandybrown; font-weight: bold;"> -: </span><span style="color: green;">{{ .Threshold }}</span></p>
+        {{else}}
+        <p><span style="color: sandybrown; font-weight: bold;"> -: </span><span style="color: red;">{{ .Received }}</span></p>
+        <p><span style="color: sandybrown; font-weight: bold;"> -: </span><span style="color: red;">{{ .State }}</span></p>
+        <p><span style="color: sandybrown; font-weight: bold;"> -: </span><span style="color: red;">{{ .Threshold }}</span></p>
+        {{end}}
+      {{end}}
+    
+  </div>
+  
+  
+  </div>
+  
+  
+  <div class="columni">
+    
+    <div class="column">
+    <div id="tcp_stats" class="card">
+      
+       <div class="rowi">
+  		<div class="columni">
+        <h3>TCP Echo</h3>
+        	<span style="font-size: 5em; color: Tomato;">
+  		<i class="fas fa-server"></i>
+		</span>
+        </div>
+        
+  		<div class="columni" style="margin-top: 50px;">
+        {{if eq .TcpLogWarehouse.StatusLogs.State "healthy"}}
+        <span style="font-size: 5em; color: LightGreen; padding: 25px;">
+          <i class="fas fa-smile-beam"></i>
+        </span>
+
+              {{else}}
+              <span style="font-size: 5em; color: lightgray; padding: 25px;">
+                <i class="fas fa-frown"></i>
+              </span>
+
+              {{end}}
+        </div>
+	</div>
+      <div>
+        {{if eq .TcpLogWarehouse.StatusLogs.State "healthy"}}
+        <p style="font-weight: bold;"><span>Status:</span> <span style="color: darkgreen;">{{.TcpLogWarehouse.StatusLogs.State}}</span></p>
+    {{else}}
+        <p style="font-weight: bold;"><span>Status:</span> <span style="color: red;">{{.TcpLogWarehouse.StatusLogs.State}}</span></p>
+    {{end}}
+      </div>
+    </div>
+  </div>
+  </div>
+  
+  <div id="tcp_logs" class="columni" style="height:400px;width:50%;border:1px solid #ccc;overflow:auto;text-align: left; 
+  background-color: black; color: blanchedalmond;">
+    {{range .TcpLogWarehouse.LogSlice}}
+    <p><span style="color: sandybrown; font-weight: bold;"> -: </span><span>{{ .Auth }}</span></p>
+        <p><span style="color: sandybrown; font-weight: bold;"> -: </span><span>{{ .Sent }}</span></p>
+
+        {{if .CloudState}}
+        <p><span style="color: sandybrown; font-weight: bold;"> -: </span><span style="color: green;">{{ .Received }}</span></p>
+        
+        <p><span style="color: sandybrown; font-weight: bold;"> -: </span><span style="color: green;">{{ .State }}</span></p>
+        <p><span style="color: sandybrown; font-weight: bold;"> -: </span><span style="color: green;">{{ .Threshold }}</span></p>
+        {{else}}
+        <p><span style="color: sandybrown; font-weight: bold;"> -: </span><span style="color: red;">{{ .Received }}</span></p>
+        <p><span style="color: sandybrown; font-weight: bold;"> -: </span><span style="color: red;">{{ .State }}</span></p>
+        <p><span style="color: sandybrown; font-weight: bold;"> -: </span><span style="color: red;">{{ .Threshold }}</span></p>
+        {{end}}
+  {{end}}
+</div>
+</div>
+
+<form class="form-inline" method="POST" onsubmit="setTimeout(function(){document.getElementById('email').value = ''; window.location.reload();},100);">
+  <label for="email">Email:</label>
+  <input type="email" id="email" placeholder="Enter email" name="email">
+  
+  <label class="switch">
+    {{if .Notification.Update}}
+  <input id="cbox" type="checkbox" name="toggle" checked> <span class="slider round"></span>
+  {{else}}
+  <input id="cbox" type="checkbox" name="toggle"> <span class="slider round"></span>
+  {{end}}
+</label>
+	<label>
+    	<p>Off/On Email Messages</p>
+    </label>
+  <button id="btn" type="submit">Submit</button>
+</form>
+<br>
+<a href="https://github.com/icommit/CW-SRE-TEST" target="_blank"><h3 style="padding-left: 40%; background-color: blanchedalmond;">Source Code: <span><i class="fab fa-github"></i></span></h3></a>
+</body>
+</html>
