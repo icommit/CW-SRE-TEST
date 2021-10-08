@@ -13,10 +13,10 @@ The second collection- `config` has a document named `config` with two fields: a
 And finally you must setup [Mailgun](https://www.mailgun.com/ "Mailgun") for our notification service. After you have signed up for Mailgun and obtain the proper credentials, open the `app.yaml` file and fill in the appropriate fields.
 
 #### **Tests**
-Golang test files ends with `filename_test.go`. Filename being the name of the file being tested. Whenever you are in a directory containing a test file, you can run the test by typing:  `go test -v .`. Not the dot after the -v is pointing to the current directory.
+Golang test files ends with `filename_test.go`. Filename being the name of the file being tested. Whenever you are in a directory containing a test file, you can run the test by typing:  `go test -v .`. Note, the dot after the -v is pointing to the current directory.
 
 #### **Documentation**
 There are two ways to generate documentation. `godoc` and `go doc`. The difference being that the former is web based and can generate visually appealing html pages. The latter is command line based. For example when in the appropriate directory, the command `go doc --all`will generate all documented exported functions and collections.
 
 #### **Reflection**
-Golang is a great tool for web and cloud engineering and I'm sure in other contended domains as well. I really had such a good time working on this project. I got to use one of my favorite nosql database- cloud firestore. I learnt something new about making ajax request to the backend- though I didn't get to use it in this project. But my favorite part of this project by far was designing the log feed in html. Basically I wanted to design something that mimicks terminal output. And the result turned out just great.
+Golang is a great tool for web and cloud engineering and I'm sure in other contested domains as well. I really had such a good time working on this project. I got to use one of my favorite nosql database- cloud firestore. I learnt something new about making ajax request to the backend- though I didn't get to use it in this project. But my favorite part of this project by far was designing the log feed in html. Basically I wanted to design something that mimicks terminal output. And the result turned out just great.
