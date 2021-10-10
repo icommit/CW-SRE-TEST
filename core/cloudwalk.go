@@ -300,7 +300,6 @@ func Checks(ctx context.Context, client *firestore.Client, service_type string, 
 
 			_, e := store.Set(ctx, map[string]interface{}{
 				"downtime_count": 0,
-				"uptime_count":   0,
 			}, firestore.MergeAll)
 			if e != nil {
 				log.Printf("Set: An error has occurred: %s", err)
@@ -341,7 +340,6 @@ func Checks(ctx context.Context, client *firestore.Client, service_type string, 
 
 			_, e := store.Set(ctx, map[string]interface{}{
 				"uptime_count":   0,
-				"downtime_count": 0,
 			}, firestore.MergeAll)
 			if e != nil {
 				log.Printf("Set: An error has occurred: %s", err)
