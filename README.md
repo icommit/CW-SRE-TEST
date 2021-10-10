@@ -12,6 +12,9 @@ The second collection- `config` has a document named `config` with two fields: a
 
 And finally you must setup [Mailgun](https://www.mailgun.com/ "Mailgun") for our notification service. After you have signed up for Mailgun and obtain the proper credentials, open the `app.yaml` file and fill in the appropriate fields.
 
+#### **Email Messages**
+Upon reaching a sucess-failure threshold, the program sends the appropriate message indicating whether a server is offline or online. In a real world scenario this is exactly what you want; but for the purpose of this demonstration, you must explicitly subscribe to receive downtime or uptime messages (quota issues). The frontend provides a form for seamless subscription/unsubscription. The text field and the toggle switch work independently of one another but you must submit the form each time to reflect the desired intent.
+
 #### **Tests**
 Golang test files ends with `filename_test.go`. Filename being the name of the file being tested. Whenever you are in a directory containing a test file, you can run the test by typing:  `go test -v .`. Note, the dot after the -v is pointing to the current directory.
 
